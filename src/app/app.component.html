@@ -1,34 +1,22 @@
 
 <body class="min-h-screen bg-gray-100 p-6 font-sans antialiased">
-  <div class="container">
+  <div class="container mx-auto">
       <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-8">
         Weather APP
       </h1>
 
-      <div class="city-input-container">
-          <input type="text" class="city-input" placeholder="Input city">
-          <button class="add-button">Add City</button>
-      </div>
+      <app-city-form (city)="addCity($event)"/>
 
-      <div class="grid">
-          <div class="weather-card relative">
-            <div class="">
-              <button type="button" class=" absolute top-0 right-0 bg-white rounded-md p-1 m-1 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              <div>
-                <h2 class="city-name">Jakarta</h2>
-                <p class="temperature">30°C</p>
-                <p class="description">Cerah Berawan</p>
-                <div class="details">
-                    <span>Kelembaban: 70%</span>
-                    <span>Angin: 15 km/j</span>
-                </div>
-              </div>
-            </div>
-          </div>
+      @if (isEmptyData()) {
+        <div>There are no items.</div>
+      } @else {
+        <div class="grid grid-cols-3 gap-4">
+          @for (city of cities; track city) {
+            <app-city-weather 
+              [city]="city"
+              (close)="removeCity(city)"
+            />
+          }
           <div class="weather-card relative">
             <button type="button" class=" absolute top-0 right-0 bg-white rounded-md p-1 m-1 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
               <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -57,11 +45,12 @@
               <span class="block sm:inline ml-2">Pesan error akan muncul di sini.</span>
             </div>
           </div>
-      </div>
+        </div>
+      }
 
       <div class="empty-state" style="display: none;">
-          <p class="text-xl">Belum ada kota yang ditambahkan.</p>
-          <p class="text-md">Gunakan kolom di atas untuk menambahkan kota.</p>
+        <p class="text-xl">Belum ada kota yang ditambahkan.</p>
+        <p class="text-md">Gunakan kolom di atas untuk menambahkan kota.</p>
       </div>
   </div>
 </body>

@@ -1,0 +1,12 @@
+<div class="overflow-hidden bg-white p-3 relative rounded-lg border border-gray-200 bg-background text-card-foreground shadow-sm">
+  <app-close-button (click)="closeClicked()"/>
+  <div>
+    <h2 class="city-name">{{city()}}</h2>
+    <p class="temperature">30°C</p>
+    <p class="description">Cerah Berawan</p>
+    <div class="details">
+        <span>Kelembaban: 70%</span>
+        <span>Angin: 15 km/j</span>
+    </div>
+  </div>
+</div>

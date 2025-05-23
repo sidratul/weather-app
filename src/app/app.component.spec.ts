@@ -27,3 +27,7 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angularhw');
   });
 });
+function expect(app: AppComponent) {
+  throw new Error('Function not implemented.');
+}
+

@@ -1,4 +1,6 @@
-export interface Weather {
+export type Weather = WeatherDetail & Main & Pick<OpenWeather, 'wind'>;
+
+export interface OpenWeather {
   coord: Coord
   weather: WeatherDetail[]
   base: string

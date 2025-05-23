@@ -1,50 +1,24 @@
 
-<body class="min-h-screen bg-gray-100 p-6 font-sans antialiased">
+<div class="min-h-screen bg-gray-100 p-6 font-sans antialiased">
   <div class="container mx-auto">
       <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-8">
         Weather APP
       </h1>
 
       <app-city-form (city)="addCity($event)"/>
-
       @if (isEmptyData()) {
-        <div>There are no items.</div>
+        <div>
+          <svg class="mx-auto mb-4" width="86px" height="86px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;}.cls-2{fill:#17061c;}.cls-3{fill:#ff4a64;}</style> </defs> <title></title> <g id="location"> <rect class="cls-1" height="32" id="bg" width="32"></rect> <path class="cls-2" d="M16,29.49c-6,0-10-12.08-10-17a10,10,0,0,1,20,0C26,17.41,22,29.49,16,29.49Zm0-25a8,8,0,0,0-8,8c0,4.68,3.87,15,8,15s8-10.3,8-15A8,8,0,0,0,16,4.51Z"></path> <circle class="cls-3" cx="16" cy="12.64" r="3.99"></circle> <path class="cls-2" d="M16,17.63a5,5,0,1,1,5-5A5,5,0,0,1,16,17.63Zm0-8a3,3,0,1,0,3,3A3,3,0,0,0,16,9.66Z"></path> </g> </g></svg>
+          <div class="text-center font-bold">Add Cities to see the content!</div>
+        </div>
       } @else {
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           @for (city of cities; track city) {
             <app-city-weather 
               [city]="city"
               (close)="removeCity(city)"
             />
           }
-          <div class="weather-card relative">
-            <button type="button" class=" absolute top-0 right-0 bg-white rounded-md p-1 m-1 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <h2 class="city-name">Bandung</h2>
-            <div class="animate-pulse flex flex-col gap-2">
-              <p class="temperature mt-2 h-10 bg-gray-300"></p>
-              <p class="description h-4 bg-gray-300"></p>
-              <div class="flex flex-row gap-8">
-                <div class="h-4 w-full bg-gray-300"></div>
-                <div class="h-4 w-full bg-gray-300"></div>
-              </div>
-            </div>
-          </div>
-          <div class="weather-card relative">
-            <button type="button" class=" absolute top-0 right-0 bg-white rounded-md p-1 m-1 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <h2 class="city-name">Surabaya</h2>
-            <div class="text-red-700 ">
-              <strong class="font-bold">Error!</strong>
-              <span class="block sm:inline ml-2">Pesan error akan muncul di sini.</span>
-            </div>
-          </div>
         </div>
       }
 
@@ -53,6 +27,6 @@
         <p class="text-md">Gunakan kolom di atas untuk menambahkan kota.</p>
       </div>
   </div>
-</body>
+</div>
 
 <router-outlet />

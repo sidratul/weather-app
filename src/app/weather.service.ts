@@ -10,10 +10,6 @@ import { catchError, map, finalize } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class WeatherService {
-  private apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
-  private apiKey = environment.WEATHER_API_KEY;
-  private units = 'metric';
-
   private loading = new BehaviorSubject<boolean>(false);
   public readonly loading$ = this.loading.asObservable();
   
@@ -21,7 +17,7 @@ export class WeatherService {
 
   getWeather(city: string): Observable<Weather> {
     this.loading.next(true);
-    const url = `${this.apiUrl}?q=${city}&APPID=${this.apiKey}&units=${this.units}`
+    const url = `/api/weather/${city}`
 
     return this.http.get<Weather>(url).pipe(
       map(response => {
@@ -37,13 +33,7 @@ export class WeatherService {
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      if (error.status === 404) {
-        errorMessage = `City not found: ${error.error.message || 'Make sure the city name is correct.'}`;
-      } else if (error.status === 401) {
-        errorMessage = `Akses tidak sah: ${error.error.message || 'Check your API Key.'}`;
-      } else {
-        errorMessage = `Error code ${error.status}: ${error.message}`;
-      }
+      errorMessage = `${error.error.message || 'Internal server error.'}`;
     }
     return throwError(() => new Error(errorMessage));
   }

@@ -1,12 +1,31 @@
-<div class="overflow-hidden bg-white p-3 relative rounded-lg border border-gray-200 bg-background text-card-foreground shadow-sm">
+<div class="overflow-hidden min-h-[200px] bg-white p-3 relative rounded-lg border border-gray-200 bg-background text-card-foreground shadow-sm">
   <app-close-button (click)="closeClicked()"/>
-  <div>
+  <div class="">
     <h2 class="city-name">{{city()}}</h2>
-    <p class="temperature">30°C</p>
-    <p class="description">Cerah Berawan</p>
-    <div class="details">
-        <span>Kelembaban: 70%</span>
-        <span>Angin: 15 km/j</span>
-    </div>
+    @if (loading) {
+      <div class="animate-pulse flex flex-col gap-2">
+        <p class="temperature mt-2 h-10 bg-gray-300"></p>
+        <p class="description h-4 bg-gray-300"></p>
+        <div class="flex flex-row gap-8">
+          <div class="h-4 w-full bg-gray-300"></div>
+          <div class="h-4 w-full bg-gray-300"></div>
+        </div>
+      </div>
+    } @else if(error) { 
+      <div class="text-red-700 ">
+        <strong class="font-bold">Error!</strong>
+        <span class="block sm:inline ml-2">{{error}}.</span>
+      </div>
+    } @else {
+      <div class="flex items-center mb-2">
+        <p class="temperature">{{getTemp()}}</p>
+        <img src={{weather.icon}}/>
+      </div>
+      <p class="description">{{weather.description}}</p>
+      <div class="details">
+          <span>Humidity: {{weather.humidity}}%</span>
+          <span>Wind: {{getWind()}}</span>
+      </div>
+    }
   </div>
 </div>

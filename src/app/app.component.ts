@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CityFormComponent } from './city-form/city-form.component';
 import { CityWeatherComponent } from './city-weather/city-weather.component';
+import { LocalstorageService } from './localstorage.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,24 @@ import { CityWeatherComponent } from './city-weather/city-weather.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angularhw';
   cities: string[] = []
+  cityKey = 'CITIES';
+  constructor(private storageService: LocalstorageService) {}
+  
+  ngOnInit(): void {
+    const storageData = this.storageService.getData(this.cityKey);
+    if (!storageData) {
+      return;
+    }
+    this.cities = JSON.parse(storageData);
+  }
 
   addCity(city: string){
     if(this.cities.indexOf(city.trim()) === -1) {
       this.cities.push(city.trim());
+      this.updateCityStorage();
     }
   }
 
@@ -27,6 +39,11 @@ export class AppComponent {
     const index = this.cities.indexOf(city);
     if (index > -1) {
       this.cities.splice(index, 1);
+      this.updateCityStorage();
     }
+  }
+
+  updateCityStorage(){
+    this.storageService.saveData(this.cityKey, JSON.stringify(this.cities));
   }
 }

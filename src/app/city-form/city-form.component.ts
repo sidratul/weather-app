@@ -13,7 +13,6 @@ export class CityFormComponent {
   city = output<string>();
   
   addCity(): void {
-    console.log("cityname", this.cityName)
     if (!this.cityName.trim()) {
       return;
     }

@@ -10,7 +10,7 @@ import { CityWeatherComponent } from './city-weather/city-weather.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'angular weather app';
+  title = 'angularhw';
   cities: string[] = []
 
   addCity(city: string){

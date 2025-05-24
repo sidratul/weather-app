@@ -2,11 +2,10 @@
   "name": "angularhw",
   "version": "0.0.0",
   "scripts": {
-    "create-env": "node scripts/create-env.js",
     "ng": "ng",
-    "start": "npm run create-env && ng serve",
-    "build": "create-env ng build",
-    "watch": "create-env ng build --watch --configuration development",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:angularhw": "node dist/angularhw/server/server.mjs"
   },

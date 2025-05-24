@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CityFormComponent } from './city-form/city-form.component';
 import { CityWeatherComponent } from './city-weather/city-weather.component';
-import { LocalstorageService } from './localstorage.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +14,10 @@ export class AppComponent implements OnInit {
   title = 'angularhw';
   cities: string[] = []
   cityKey = 'CITIES';
-  constructor(private storageService: LocalstorageService) {}
+  constructor(private storageService: LocalStorageService) {}
   
   ngOnInit(): void {
-    const storageData = this.storageService.getData(this.cityKey);
+    const storageData = this.storageService.getItem(this.cityKey);
     if (!storageData) {
       return;
     }
@@ -44,6 +44,6 @@ export class AppComponent implements OnInit {
   }
 
   updateCityStorage(){
-    this.storageService.saveData(this.cityKey, JSON.stringify(this.cities));
+    this.storageService.setItem(this.cityKey, JSON.stringify(this.cities));
   }
 }
